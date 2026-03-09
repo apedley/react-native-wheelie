@@ -68,6 +68,68 @@ export default function App() {
 | `decelerationRate` | `number` | `0.997` | Momentum deceleration (0–1) |
 | `renderItem` | `({ item, index }) => ReactElement` | — | Custom item renderer |
 
+## Multi-column picker
+
+Use `MultiWheelPicker` for side-by-side wheels — like iOS date/time pickers.
+
+```tsx
+import { useState } from 'react';
+import { MultiWheelPicker } from 'react-native-wheelie';
+
+const hourItems = Array.from({ length: 24 }, (_, i) => ({
+  label: String(i).padStart(2, '0'),
+  value: i,
+}));
+
+const minuteItems = Array.from({ length: 60 }, (_, i) => ({
+  label: String(i).padStart(2, '0'),
+  value: i,
+}));
+
+export default function TimePicker() {
+  const [hours, setHours] = useState(9);
+  const [minutes, setMinutes] = useState(30);
+
+  return (
+    <MultiWheelPicker
+      columns={[
+        { items: hourItems, selectedIndex: hours },
+        { items: minuteItems, selectedIndex: minutes },
+      ]}
+      separators={[':']}
+      onValuesChange={([h, m]) => {
+        setHours(h);
+        setMinutes(m);
+      }}
+    />
+  );
+}
+```
+
+### MultiWheelPicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `WheelPickerColumn[]` | **required** | Array of column definitions |
+| `onValuesChange` | `(indices: number[]) => void` | — | Called when any column settles, with all current indices |
+| `itemHeight` | `number` | `44` | Row height in pixels (shared across columns) |
+| `visibleItems` | `number` | `5` | Visible rows (shared across columns) |
+| `containerStyle` | `ViewStyle` | — | Style for the outer container |
+| `indicatorStyle` | `ViewStyle` | — | Style for the unified selection indicator |
+| `decelerationRate` | `number` | `0.997` | Momentum deceleration (shared across columns) |
+| `separators` | `string[]` | — | Strings rendered between columns (e.g., `[":"]`) |
+| `separatorTextStyle` | `TextStyle` | — | Style for separator text |
+
+### WheelPickerColumn
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `items` | `WheelPickerItem[]` | **required** | Items for this column |
+| `selectedIndex` | `number` | `0` | Currently selected index |
+| `flex` | `number` | `1` | Flex weight controlling column width |
+| `itemTextStyle` | `TextStyle` | — | Text style for this column's items |
+| `renderItem` | `({ item, index }) => ReactElement` | — | Custom renderer for this column |
+
 ## Custom rendering
 
 ```tsx

@@ -1,2 +1,8 @@
 export { WheelPicker } from './WheelPicker';
-export type { WheelPickerItem, WheelPickerProps } from './types';
+export { MultiWheelPicker } from './MultiWheelPicker';
+export type {
+  WheelPickerItem,
+  WheelPickerProps,
+  WheelPickerColumn,
+  MultiWheelPickerProps,
+} from './types';

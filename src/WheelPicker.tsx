@@ -137,6 +137,7 @@ export const WheelPicker: React.FC<WheelPickerProps> = ({
   indicatorStyle,
   decelerationRate = 0.997,
   renderItem,
+  showIndicator = true,
 }) => {
   const containerHeight = itemHeight * visibleItems;
   const centerY = (containerHeight - itemHeight) / 2;
@@ -190,6 +191,7 @@ export const WheelPicker: React.FC<WheelPickerProps> = ({
 
   // ------ gesture ------
   const panGesture = Gesture.Pan()
+    .activeOffsetY([-5, 5])
     .onBegin(() => {
       cancelAnimation(scrollY);
       lastScrollY.value = scrollY.value;
@@ -255,14 +257,16 @@ export const WheelPicker: React.FC<WheelPickerProps> = ({
         ))}
 
         {/* Selection indicator — the two hairline borders iOS uses */}
-        <View
-          pointerEvents="none"
-          style={[
-            styles.indicator,
-            { top: centerY, height: itemHeight },
-            indicatorStyle,
-          ]}
-        />
+        {showIndicator && (
+          <View
+            pointerEvents="none"
+            style={[
+              styles.indicator,
+              { top: centerY, height: itemHeight },
+              indicatorStyle,
+            ]}
+          />
+        )}
       </Animated.View>
     </GestureDetector>
   );
