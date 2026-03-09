@@ -1,0 +1,71 @@
+{
+  "name": "react-native-wheelie",
+  "version": "0.1.0",
+  "description": "iOS-style wheel picker for React Native using Reanimated and Gesture Handler",
+  "main": "./dist/module/index.js",
+  "types": "./dist/typescript/index.d.ts",
+  "source": "src/index.ts",
+  "files": [
+    "src",
+    "dist",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "lib/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "bob build",
+    "clean": "rm -rf lib"
+  },
+  "keywords": [
+    "react-native",
+    "picker",
+    "wheel",
+    "ios",
+    "reanimated",
+    "gesture-handler"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-gesture-handler": ">=2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "react": "^18.0.0",
+    "react-native": "^0.74.0",
+    "react-native-builder-bob": "^0.40.18",
+    "react-native-gesture-handler": "^2.0.0",
+    "react-native-reanimated": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/typescript/index.d.ts",
+      "default": "./dist/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "dist/"
+  ]
+}
